@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./globals.css";
+
+import Providers from "./_providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Providers>
+      </body>
     </html>
   );
 }

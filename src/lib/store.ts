@@ -7,8 +7,10 @@ interface SearchState {
 }
 
 interface MovieState {
-  movies: Movie[];
-  setMovies: (movies: Movie[]) => void;
+  moviePages: TMDBResponse[] | undefined;
+  setMoviePages: (moviePages: TMDBResponse[]) => void;
+  solidQuery: string;
+  setSolidQuery: (query: string) => void;
 }
 
 const hashStorage: StateStorage = {
@@ -45,8 +47,10 @@ export const useSearchStore = create<SearchState>()(
 export const useMoviesStore = create<MovieState>()(
   persist(
     (set) => ({
-      movies: [],
-      setMovies: (movies) => set({ movies }),
+      moviePages: undefined,
+      setMoviePages: (pages) => set({ moviePages: pages }),
+      solidQuery: "",
+      setSolidQuery: (query) => set({ solidQuery: query }),
     }),
     {
       name: "movies-storage",
